@@ -21,4 +21,4 @@ const ProductSchema = new Schema({
   inventory: { type: InventorySchema, required: true },
 });
 
-const Product = model<TProduct>("product", ProductSchema);
+export const ProductModel = model<TProduct>("product", ProductSchema);

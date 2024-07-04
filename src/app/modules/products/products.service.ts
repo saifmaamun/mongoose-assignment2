@@ -13,7 +13,22 @@ const getAllProductsFromDB = async () => {
   return result;
 };
 
+// get single product
+const getSingleProductFromDB = async (_id: string) => {
+  const result = await ProductModel.findOne({ _id });
+  return result;
+};
+// delete single product
+const deleteSingleProductFromDB = async (_id: string) => {
+  const result = await ProductModel.deleteOne({ _id });
+  return result;
+};
+// Update single product
+// search products by name
+
 export const ProductServices = {
   productCreateInToDB,
   getAllProductsFromDB,
+  getSingleProductFromDB,
+  deleteSingleProductFromDB,
 };

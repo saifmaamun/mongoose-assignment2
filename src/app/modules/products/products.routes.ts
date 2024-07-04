@@ -3,6 +3,8 @@ import { ProductController } from "./products.controller";
 
 const router = express.Router();
 
+router.get("/:productId", ProductController.getSingleProduct);
+router.delete("/:productId", ProductController.deleteSingleProduct);
 router.post("/", ProductController.createProduct);
 router.get("/", ProductController.getAllProducts);
 

@@ -37,6 +37,12 @@ const updateSingleProductFromDB = async (
 };
 
 // search products by name
+const searchProductsFromDB = async (name: string) => {
+  const result = await ProductModel.find({
+    name: { $regex: name, $options: "i" },
+  });
+  return result;
+};
 
 export const ProductServices = {
   productCreateInToDB,
@@ -44,4 +50,5 @@ export const ProductServices = {
   getSingleProductFromDB,
   deleteSingleProductFromDB,
   updateSingleProductFromDB,
+  searchProductsFromDB,
 };

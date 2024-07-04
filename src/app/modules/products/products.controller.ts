@@ -99,7 +99,26 @@ const updateSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
-// search single product
+// search product
+const searchProduct = async (req: Request, res: Response) => {
+  try {
+    const searchTerm = (req.query.name as string).trim();
+    console.log(searchTerm);
+
+    const result = await ProductServices.searchProductsFromDB(searchTerm);
+    res.status(200).json({
+      status: true,
+      message: `searchTermsProducts matching search term ${searchTerm} fetched successfully!`,
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: `"Product not found"`,
+      error: err || err.message,
+    });
+  }
+};
 
 export const ProductController = {
   createProduct,
@@ -107,4 +126,5 @@ export const ProductController = {
   getSingleProduct,
   deleteSingleProduct,
   updateSingleProduct,
+  searchProduct,
 };

@@ -24,6 +24,18 @@ const deleteSingleProductFromDB = async (_id: string) => {
   return result;
 };
 // Update single product
+const updateSingleProductFromDB = async (
+  _id: string,
+  data: { [key: string]: string | number | boolean }
+) => {
+  const result = await ProductModel.findOneAndUpdate(
+    { _id },
+    { $set: data },
+    { upsert: true, new: true }
+  );
+  return result;
+};
+
 // search products by name
 
 export const ProductServices = {
@@ -31,4 +43,5 @@ export const ProductServices = {
   getAllProductsFromDB,
   getSingleProductFromDB,
   deleteSingleProductFromDB,
+  updateSingleProductFromDB,
 };

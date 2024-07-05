@@ -15,7 +15,7 @@ const placeOrder = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Order creation failed",
-      error: err || err.message,
+      error: err.message || err,
     });
   }
 };

@@ -7,7 +7,7 @@ const OrderSchema = new Schema({
     required: true,
   },
   productId: { type: String, required: true },
-  price: { type: Number, required: true },
+  price: { type: Number },
   quantity: { type: Number, required: true },
 });
 

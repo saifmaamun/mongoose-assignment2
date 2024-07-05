@@ -7,13 +7,13 @@ const createProduct = async (req: Request, res: Response) => {
     const productData = req.body;
     const result = await ProductServices.productCreateInToDB(productData);
     res.status(200).json({
-      status: true,
+      success: true,
       message: "Product created successfully!",
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
-      status: false,
+      success: false,
       message: "Product creation failed",
       error: err || err.message,
     });
@@ -25,13 +25,13 @@ const getAllProducts = async (req: Request, res: Response) => {
   try {
     const result = await ProductServices.getAllProductsFromDB();
     res.status(200).json({
-      status: true,
+      success: true,
       message: "Products fetched successfully!",
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
-      status: false,
+      success: false,
       message: "Products retrived failed",
       error: err || err.message,
     });
@@ -44,13 +44,13 @@ const getSingleProduct = async (req: Request, res: Response) => {
     const { productId } = req.params;
     const result = await ProductServices.getSingleProductFromDB(productId);
     res.status(200).json({
-      status: true,
+      success: true,
       message: "Product fetched successfully!",
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
-      status: false,
+      success: false,
       message: "Product not found",
       error: err || err.message,
     });
@@ -63,13 +63,13 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
     const { productId } = req.params;
     const result = await ProductServices.deleteSingleProductFromDB(productId);
     res.status(200).json({
-      status: true,
+      success: true,
       message: "Product deleted successfully!",
       data: null,
     });
   } catch (err: any) {
     res.status(500).json({
-      status: false,
+      success: false,
       message: "Product not found",
       error: err || err.message,
     });
@@ -86,13 +86,13 @@ const updateSingleProduct = async (req: Request, res: Response) => {
       productData
     );
     res.status(200).json({
-      status: true,
+      success: true,
       message: "Product updated successfully!",
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
-      status: false,
+      success: false,
       message: "Product not found",
       error: err || err.message,
     });
@@ -103,17 +103,16 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 const searchProduct = async (req: Request, res: Response) => {
   try {
     const searchTerm = (req.query.name as string).trim();
-    console.log(searchTerm);
 
     const result = await ProductServices.searchProductsFromDB(searchTerm);
     res.status(200).json({
-      status: true,
+      success: true,
       message: `searchTermsProducts matching search term ${searchTerm} fetched successfully!`,
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
-      status: false,
+      success: false,
       message: `"Product not found"`,
       error: err || err.message,
     });

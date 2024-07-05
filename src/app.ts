@@ -19,6 +19,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     success: false,
     message: "Route not found",
   });
+  next();
 });
 
 app.get("/", (req: Request, res: Response) => {

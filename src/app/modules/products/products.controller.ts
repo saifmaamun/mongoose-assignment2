@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
 import { ProductServices } from "./products.service";
 import ProductValidationSchema from "./products.validation";
@@ -64,6 +65,7 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const result = await ProductServices.deleteSingleProductFromDB(productId);
+    console.log(result);
     res.status(200).json({
       success: true,
       message: "Product deleted successfully!",

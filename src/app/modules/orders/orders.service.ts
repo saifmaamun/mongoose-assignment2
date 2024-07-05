@@ -60,7 +60,6 @@ const placeOrderInToDB = async (orderData: TOrder) => {
     // Abort the transaction if any operation fails
     await session.abortTransaction();
     session.endSession();
-    console.error("Error placing order and updating inventory:", error);
     throw error;
   }
 };

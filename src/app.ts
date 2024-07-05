@@ -13,6 +13,10 @@ app.use("/api/products", ProductRoutes);
 // order routes
 app.use("/api/orders", OrderRoutes);
 
+app.get("/", (req: Request, res: Response) => {
+  res.send("There is nothing either good or bad, but thinking makes it so.");
+});
+
 // not found routes
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({
@@ -20,10 +24,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     message: "Route not found",
   });
   next();
-});
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("There is nothing either good or bad, but thinking makes it so.");
 });
 
 export default app;

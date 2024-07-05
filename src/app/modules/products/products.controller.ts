@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { ProductServices } from "./products.service";
+import ProductValidationSchema from "./products.validation";
 
 // create a new product
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productData = req.body;
-    const result = await ProductServices.productCreateInToDB(productData);
+    const zodParsedData = ProductValidationSchema.parse(productData);
+    const result = await ProductServices.productCreateInToDB(zodParsedData);
     res.status(200).json({
       success: true,
       message: "Product created successfully!",
@@ -80,7 +82,9 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
 const updateSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const productData = req.body;
+    const productData = req.body.partial();
+    // const zodParsedData = ProductValidationSchema.parse(productData);
+
     const result = await ProductServices.updateSingleProductFromDB(
       productId,
       productData

@@ -22,7 +22,7 @@ const placeOrderInToDB = async (orderData: TOrder) => {
       !product.inventory.inStock ||
       product.inventory.quantity < orderData.quantity
     ) {
-      throw new Error("Product is out of stock or insufficient quantity");
+      throw new Error("Insufficient quantity available in inventory");
     }
 
     // Calculate the new quantity

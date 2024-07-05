@@ -26,6 +26,7 @@ const deleteSingleProductFromDB = async (_id: string) => {
 // Update single product
 const updateSingleProductFromDB = async (
   _id: string,
+  // data: Partial<DocumentDefinition<typeof ProductModel>>
   data: { [key: string]: string | number | boolean }
 ) => {
   const result = await ProductModel.findOneAndUpdate(

@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { OrderService } from "./orders.service";
+import OrderValidationSchema from "./orders.validation";
 
 // place an order
 const placeOrder = async (req: Request, res: Response) => {
   try {
     const orderData = req.body;
-    const result = await OrderService.placeOrderInToDB(orderData);
+    const zodParsedData = OrderValidationSchema.parse(orderData);
+    const result = await OrderService.placeOrderInToDB(zodParsedData);
     res.status(200).json({
       success: true,
       message: "Order created successfully!",
@@ -33,7 +35,7 @@ const getOrder = async (req: Request, res: Response) => {
       if (result.length === 0) {
         res.status(404).json({
           success: false,
-          message: `No orders found for email: ${trimmedEmail}`,
+          message: `Order not found`,
         });
         return;
       }
@@ -57,7 +59,7 @@ const getOrder = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: "Orders retrieved failed",
+      message: "Order not found",
       error: err.message || err,
     });
   }

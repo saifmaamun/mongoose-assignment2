@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 export type TVariants = {
   type: string;
   value: string;
@@ -16,3 +18,9 @@ export type TProduct = {
   variants: TVariants[];
   inventory: TInventory;
 };
+
+// for static methods
+export interface TProductModel extends Model<TProduct> {
+  // eslint-disable-next-line no-unused-vars
+  isProductExist(name: string): Promise<TProduct | null>;
+}
